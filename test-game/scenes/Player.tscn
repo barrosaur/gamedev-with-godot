@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://mlr3e24hwkor"]
+
+[ext_resource type="Texture2D" uid="uid://gjuy2sjwmnic" path="res://assets/idle-left.png" id="1_p0vlq"]
+[ext_resource type="Script" uid="uid://dlhjrav83b1be" path="res://scripts/player.gd" id="1_v6fml"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v6fml"]
+atlas = ExtResource("1_p0vlq")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3li8b"]
+atlas = ExtResource("1_p0vlq")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mdl7e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v6fml")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3li8b")
+}],
+"loop": true,
+"name": &"idleLeft",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qu4a1"]
+size = Vector2(6, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_70d11"]
+size = Vector2(4, 4)
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 10
+collision_layer = 3
+script = ExtResource("1_v6fml")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visibility_layer = 3
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_mdl7e")
+animation = &"idleLeft"
+autoplay = "idleLeft"
+
+[node name="BodyCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_qu4a1")
+
+[node name="LegCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_70d11")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -8)
+zoom = Vector2(4, 4)
+limit_bottom = 96
+limit_smoothed = true
+position_smoothing_enabled = true

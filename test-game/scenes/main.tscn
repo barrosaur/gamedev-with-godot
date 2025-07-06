@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1daopheuavfl"]
+
+[ext_resource type="PackedScene" uid="uid://picxcfsq57nq" path="res://scenes/background.tscn" id="1_o5qli"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Background" parent="." instance=ExtResource("1_o5qli")]
