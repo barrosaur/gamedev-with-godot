@@ -1,0 +1,140 @@
+[gd_scene load_steps=14 format=3 uid="uid://dv2a82mw6t438"]
+
+[ext_resource type="Script" uid="uid://he2emxxkdrbk" path="res://scripts/you_lost.gd" id="1_718m4"]
+[ext_resource type="PackedScene" uid="uid://b4i4siw18k7oa" path="res://scenes/background.tscn" id="1_qqbgc"]
+[ext_resource type="Texture2D" uid="uid://cbf7yhma55480" path="res://assets/lost.png" id="2_ujcxf"]
+[ext_resource type="Texture2D" uid="uid://b5fmsd84uqkno" path="res://assets/again.png" id="3_qqbgc"]
+[ext_resource type="Texture2D" uid="uid://exttm1drtlob" path="res://assets/yes.png" id="4_ujcxf"]
+[ext_resource type="Texture2D" uid="uid://b253axmeb7psf" path="res://assets/no.png" id="6_vgtol"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pn5k0"]
+texture = ExtResource("2_ujcxf")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+12:0/0 = 0
+13:0/0 = 0
+14:0/0 = 0
+15:0/0 = 0
+16:0/0 = 0
+17:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+12:1/0 = 0
+13:1/0 = 0
+14:1/0 = 0
+15:1/0 = 0
+16:1/0 = 0
+17:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_0gr66"]
+sources/0 = SubResource("TileSetAtlasSource_pn5k0")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_torgv"]
+atlas = ExtResource("2_ujcxf")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yrbyq"]
+atlas = ExtResource("2_ujcxf")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e31k4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_torgv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yrbyq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_718m4"]
+texture = ExtResource("3_qqbgc")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_vgtol"]
+sources/0 = SubResource("TileSetAtlasSource_718m4")
+
+[node name="YouLost" type="Node2D"]
+script = ExtResource("1_718m4")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="Background" parent="Camera2D" instance=ExtResource("1_qqbgc")]
+
+[node name="TileMap" type="TileMap" parent="Camera2D"]
+tile_set = SubResource("TileSet_0gr66")
+format = 2
+layer_0/tile_data = PackedInt32Array(-327681, 65536, 0, -327683, 0, 0, -393215, 131072, 0, -196612, 196608, 0, -196610, 262144, 0, -262144, 327680, 0, -262142, 393216, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Camera2D"]
+position = Vector2(61, -55)
+sprite_frames = SubResource("SpriteFrames_e31k4")
+autoplay = "default"
+frame_progress = 0.812609
+
+[node name="TileMap2" type="TileMap" parent="Camera2D"]
+tile_set = SubResource("TileSet_vgtol")
+format = 2
+layer_0/tile_data = PackedInt32Array(131066, 0, 0, 131068, 65536, 0, 131070, 0, 0, 65536, 131072, 0, 65538, 196608, 0, 65540, 262144, 0)
+
+[node name="Yes" type="TextureButton" parent="Camera2D"]
+offset_left = -62.0
+offset_top = 65.0
+offset_right = -30.0
+offset_bottom = 97.0
+texture_normal = ExtResource("4_ujcxf")
+
+[node name="No" type="TextureButton" parent="Camera2D"]
+offset_left = 2.0
+offset_top = 65.0
+offset_right = 34.0
+offset_bottom = 97.0
+texture_normal = ExtResource("6_vgtol")
+
+[connection signal="pressed" from="Camera2D/Yes" to="." method="_on_yes_pressed"]
+[connection signal="pressed" from="Camera2D/No" to="." method="_on_no_pressed"]

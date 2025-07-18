@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ydskuobm0mnm"]
+
+[ext_resource type="Script" uid="uid://cah1bkk7yoqal" path="res://scripts/score.gd" id="1_8juob"]
+
+[node name="Score" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_8juob")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
